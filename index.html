@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tenkan – Music</title>
+<meta name="description" content="Tenkan – Alternative Rock mit Electro- und Trip-Hop-Elementen aus Berlin. Neue Single „The Storm“.">
+<meta property="og:title" content="Tenkan – Music">
+<meta property="og:description" content="Alternative Rock mit Electro- und Trip-Hop-Elementen aus Berlin.">
+<meta property="og:image" content="covers/the-storm.jpg">
+<style>
+:root{
+  --night:#05060d; --deep:#0b0f22; --panel:rgba(14,18,40,.72); --line:rgba(160,180,255,.16);
+  --text:#eef0ff; --muted:#b4b9d6; --sun:#ff8a2a; --ember:#ff5a1f; --cyan:#3fd6ff;
+  --bronze:linear-gradient(135deg,#865b30 0%,#b38856 28%,#c2a980 46%,#a16f3d 68%,#8a5e32 100%);
+  --serif:"Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--night);color:var(--text);font:17px/1.65 var(--sans);overflow-x:hidden}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:-2}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(60vw 40vw at 85% 0%,rgba(255,110,40,.18),transparent 70%),
+             radial-gradient(50vw 40vw at 0% 100%,rgba(63,214,255,.10),transparent 70%)}
+a{color:var(--cyan)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+
+/* Navigation */
+nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(10px);background:rgba(5,6,13,.6);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:20px;height:60px}
+.logo{font:600 22px var(--serif);letter-spacing:.35em;text-decoration:none;background:var(--bronze);-webkit-background-clip:text;background-clip:text;color:transparent}
+nav ul{display:flex;gap:18px;list-style:none;margin:0 0 0 auto;padding:0}
+nav ul a{color:var(--muted);text-decoration:none;font-size:15px}
+nav ul a:hover{color:var(--sun)}
+.lang{background:none;border:1px solid var(--line);color:var(--text);border-radius:20px;padding:4px 12px;cursor:pointer;font:600 13px var(--sans)}
+.lang:hover{border-color:var(--sun)}
+
+/* Hero */
+.hero{min-height:88vh;display:grid;align-items:center;padding:60px 0}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+.kicker{color:var(--cyan);letter-spacing:.3em;font-size:13px;text-transform:uppercase}
+h1{font:400 clamp(56px,11vw,120px)/1 var(--serif);letter-spacing:.18em;margin:.15em 0 .2em;
+  background:var(--bronze);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 30px rgba(180,120,60,.3))}
+.bronze-text{background:var(--bronze);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tagline{font:italic 22px/1.4 var(--serif);color:var(--muted);max-width:30ch}
+.release{position:relative;border-radius:18px;padding:22px;background:var(--panel);border:1px solid var(--line);
+  box-shadow:0 0 0 1px rgba(63,214,255,.18),0 30px 80px rgba(63,180,255,.16)}
+.storm-art{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;display:block}
+.release h2{font:400 34px var(--serif);font-variant:small-caps;letter-spacing:.08em;margin:16px 0 0}
+.release p{margin:4px 0 16px;color:var(--muted)}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:700;text-decoration:none;cursor:pointer;border:0;font-size:16px}
+.btn-sun{background:var(--bronze);color:#120800;font-size:18px;
+  box-shadow:inset 0 1px 0 rgba(255,235,200,.55),inset 0 -2px 4px rgba(60,35,10,.4),0 6px 18px rgba(160,105,50,.25)}
+.btn-sun:hover{filter:brightness(1.08) saturate(1.1)}
+.btn-ghost{border:1px solid var(--line);color:var(--text);background:transparent}
+
+/* Sections */
+section{padding:80px 0}
+h3.sec{font:400 40px var(--serif);font-variant:small-caps;letter-spacing:.1em;margin:0 0 8px}
+.sec-sub{color:var(--muted);margin:0 0 34px}
+.fan{--size:300px;--gap:88px;--depth:170px;--rise:22px;position:relative;height:calc(var(--size) + 170px);
+  perspective:1100px;perspective-origin:50% 25%;overflow:hidden;margin:0 -20px;touch-action:pan-y}
+.fan-stage{position:absolute;left:50%;bottom:60px;width:var(--size);height:var(--size);margin-left:calc(var(--size) / -2);transform-style:preserve-3d}
+.fan-card{position:absolute;inset:0;padding:0;border:0;background:none;cursor:pointer;border-radius:14px;
+  transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .9s,filter .9s;will-change:transform}
+.fan-card img{width:100%;height:100%;object-fit:cover;border-radius:14px;display:block;box-shadow:0 25px 60px rgba(0,0,0,.65)}
+.fan-card.front img{box-shadow:0 0 0 2px rgba(194,169,128,.55),0 30px 80px rgba(160,105,50,.35)}
+.fan-card:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}
+.fan-info{text-align:center;margin-top:6px;min-height:60px}
+.fan-info b{display:block;font:400 30px var(--serif);font-variant:small-caps;letter-spacing:.06em}
+.fan-info span{color:var(--muted);font-size:15px}
+.fan-nav{display:flex;justify-content:center;gap:14px;margin-top:12px}
+.fan-nav button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(8,10,24,.7);color:var(--text);font-size:20px;cursor:pointer}
+.fan-nav button:hover{border-color:#c2a980}
+@media (max-width:820px){.fan{--size:210px;--gap:52px;--depth:150px;--rise:16px}.fan-info b{font-size:24px}}
+.player{margin-top:36px;border-radius:16px;background:var(--panel);border:1px solid var(--line);padding:22px;min-height:120px}
+.consent{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.consent p{margin:0;color:var(--muted);font-size:14px;flex:1 1 300px}
+.player iframe{width:100%;border:0;border-radius:12px;display:block}
+
+.about>div{max-width:780px}
+.about p{font-size:19px}
+.quote{font:italic 24px/1.45 var(--serif);color:#ffd2a8;border-left:3px solid var(--sun);padding-left:18px;margin:24px 0}
+
+form{display:grid;gap:14px;max-width:640px}
+label{font-size:14px;color:var(--muted)}
+input,textarea{width:100%;padding:13px 14px;border-radius:10px;border:1px solid var(--line);background:rgba(8,10,24,.8);color:var(--text);font:16px var(--sans)}
+input:focus,textarea:focus{outline:2px solid var(--cyan);border-color:transparent}
+textarea{min-height:150px;resize:vertical}
+.check{display:flex;gap:10px;align-items:flex-start}
+.check input{width:auto;margin-top:5px}
+.hp{position:absolute;left:-9999px}
+.form-status{min-height:1.5em;font-weight:600}
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin:0 0 40px}
+.note{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;position:relative}
+.note::before{content:"\201C";position:absolute;top:-6px;left:14px;font:64px/1 var(--serif);background:var(--bronze);-webkit-background-clip:text;background-clip:text;color:transparent}
+.note p{margin:14px 0 10px;white-space:pre-line}
+.note b{color:var(--muted);font-weight:600;font-size:15px}
+.wall-empty{color:var(--muted);font-style:italic;margin:0 0 30px}
+details.fan-form{max-width:640px}
+details.fan-form summary{cursor:pointer;list-style:none;display:inline-block}
+details.fan-form summary::-webkit-details-marker{display:none}
+details.fan-form form{margin-top:20px}
+.ajax-form{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;backdrop-filter:blur(4px)}
+
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;gap:20px;flex-wrap:wrap;justify-content:space-between}
+footer a{color:var(--muted)}
+.ig-link{display:inline-flex;align-items:center;gap:8px;color:var(--text);text-decoration:none;font-weight:600}
+.ig-link:hover{color:#c2a980}
+.ig-icon{flex:none}
+footer .ig-link{color:var(--muted);font-weight:400}
+
+[data-en]{display:none}
+html[lang=en] [data-de]{display:none}
+html[lang=en] [data-en]{display:revert}
+
+@media (max-width:820px){
+  nav ul{display:none}
+  .lang{margin-left:auto}
+  .hero .wrap{grid-template-columns:1fr}
+  .hero{min-height:auto}
+  section{padding:56px 0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">TENKAN</a>
+    <ul>
+      <li><a href="#musik"><span data-de>Musik</span><span data-en>Music</span></a></li>
+      <li><a href="#about"><span data-de>Über mich</span><span data-en>About</span></a></li>
+      <li><a href="#fans"><span data-de>Fan-Wand</span><span data-en>Fan wall</span></a></li>
+      <li><a href="#kontakt"><span data-de>Kontakt</span><span data-en>Contact</span></a></li>
+    </ul>
+    <button class="lang" id="lang" type="button" aria-label="Sprache wechseln / switch language">EN</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="kicker">Alternative Rock · Electro · Trip Hop</div>
+      <h1>TENKAN</h1>
+      <p class="tagline"><span data-de>Elektrospacerockpop – Soundtrack für dein weirdes Leben.</span><span data-en>Elektrospacerockpop – the soundtrack for your weird life.</span></p>
+      <p style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-sun" href="#musik"><span data-de>Jetzt reinhören</span><span data-en>Listen now</span></a>
+        <a class="btn btn-ghost" href="https://open.spotify.com/artist/7JMD8sj6MqssBZjgOqS4qf" target="_blank" rel="noopener"><span data-de>Auf Spotify folgen</span><span data-en>Follow on Spotify</span></a>
+      </p>
+    </div>
+
+    <div class="release">
+      <img class="storm-art" src="covers/the-storm.jpg" alt="Cover: Tenkan – The Storm">
+      <h2>The Storm</h2>
+      <p><span data-de>Neue Single · erscheint bald</span><span data-en>New single · coming soon</span></p>
+      <a class="btn btn-sun" href="https://release.landr.com/059442145282" target="_blank" rel="noopener" id="presave"><span data-de>Jetzt vormerken (Pre-Save)</span><span data-en>Pre-save now</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="musik">
+  <div class="wrap">
+    <h3 class="sec"><span data-de>Musik</span><span data-en>Music</span></h3>
+    <p class="sec-sub"><span data-de>Klick auf ein Cover, um es nach vorn zu holen – ein Klick auf das vordere spielt den Song.</span><span data-en>Click a cover to bring it to the front – click the front cover to play the song.</span></p>
+    <div class="fan" id="fan" aria-roledescription="Karussell"><div class="fan-stage" id="fan-stage"></div></div>
+    <div class="fan-info" aria-live="polite"><b id="fan-title"></b><span id="fan-sub"></span></div>
+    <div class="fan-nav"><button type="button" id="fan-prev" aria-label="Vorheriges Cover">‹</button><button type="button" id="fan-play" aria-label="Song abspielen">▶</button><button type="button" id="fan-next" aria-label="Nächstes Cover">›</button></div>
+    <div class="player" id="player">
+      <div class="consent">
+        <p><span data-de>Der Spotify-Player wird erst nach deinem Klick geladen. Dabei werden Daten an Spotify übertragen – mehr in der <a href="datenschutz.html">Datenschutzerklärung</a>.</span><span data-en>The Spotify player only loads after you click. This sends data to Spotify – see the <a href="datenschutz.html">privacy policy</a>.</span></p>
+        <button class="btn btn-sun" type="button" id="load-artist"><span data-de>Spotify-Player laden</span><span data-en>Load Spotify player</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <div>
+      <h3 class="sec"><span data-de>Über mich</span><span data-en>About</span></h3>
+      <div data-de>
+        <p>Ich komme aus Rostock und lebe seit 30 Jahren mit meiner Familie in Berlin. Musik ist mein Leben.</p>
+        <p>Selbst Musik zu machen habe ich erst spät angefangen – vorher musste ich die Familie über Wasser halten. Je älter ich werde, desto größer wird die Rolle, die Musik in meinem Leben spielt. Inzwischen ist sie mir so wichtig geworden, dass ich bereit bin, sie mit euch zu teilen.</p>
+        <p class="quote">„Musik ist mein Leben.“</p>
+      </div>
+      <div data-en>
+        <p>I was born in Rostock and have been living in Berlin with my family for 30 years. Music is my life.</p>
+        <p>I only started making my own music late – before that, I had to keep my family afloat. The older I get, the bigger the role music plays in my life. By now it has become so important to me that I’m ready to share it with you.</p>
+        <p class="quote">“Music is my life.”</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fans">
+  <div class="wrap">
+    <h3 class="sec"><span data-de>Fan-Wand</span><span data-en>Fan wall</span></h3>
+    <p class="sec-sub"><span data-de>Was dir meine Musik bedeutet – hinterlass ein paar Worte.</span><span data-en>What my music means to you – leave a few words.</span></p>
+    <div class="wall" id="wall"></div>
+    <p class="wall-empty" id="wall-empty"><span data-de>Noch keine Beiträge – sei der oder die Erste!</span><span data-en>No posts yet – be the first!</span></p>
+    <details class="fan-form">
+      <summary class="btn btn-sun"><span data-de>Beitrag schreiben</span><span data-en>Write a post</span></summary>
+      <form class="ajax-form" action="https://formspree.io/f/xqpqgqpz" method="POST">
+        <input type="hidden" name="_subject" value="Neuer Beitrag für die Fan-Wand">
+        <input type="hidden" name="art" value="Fan-Wand">
+        <div><label for="fan-name"><span data-de>Name oder Spitzname (wird veröffentlicht)</span><span data-en>Name or nickname (will be published)</span></label><input id="fan-name" name="name" required maxlength="40"></div>
+        <div><label for="fan-msg"><span data-de>Dein Beitrag (max. 500 Zeichen)</span><span data-en>Your post (max. 500 characters)</span></label><textarea id="fan-msg" name="beitrag" required maxlength="500"></textarea></div>
+        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="check"><input type="checkbox" required>
+          <span><span data-de>Ich bin einverstanden, dass mein Beitrag mit meinem Namen bzw. Spitznamen auf dieser Seite veröffentlicht werden darf. Beiträge werden vorher geprüft (siehe <a href="datenschutz.html">Datenschutz</a>).</span><span data-en>I agree that my post may be published on this site with my name or nickname. Posts are reviewed first (see <a href="datenschutz.html">privacy policy</a>).</span></span></label>
+        <div><button class="btn btn-sun" type="submit"><span data-de>Beitrag senden</span><span data-en>Send post</span></button></div>
+        <div class="form-status" role="status"
+             data-ok-de="Danke! Dein Beitrag erscheint, sobald er freigegeben ist." data-ok-en="Thanks! Your post will appear once it has been approved."></div>
+      </form>
+    </details>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="wrap">
+    <h3 class="sec"><span data-de>Kontakt</span><span data-en>Contact</span></h3>
+    <p class="sec-sub"><span data-de>Projektvorschläge, Feedback oder einfach Hallo sagen – schreib mir!</span><span data-en>Project ideas, feedback or just saying hi – drop me a line!</span></p>
+    <p style="margin:-18px 0 28px"><a class="ig-link" href="https://www.instagram.com/tenkanmusic" target="_blank" rel="noopener"><svg class="ig-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg><span data-de>Folge mir auf Instagram: @tenkanmusic</span><span data-en>Follow me on Instagram: @tenkanmusic</span></a></p>
+    <form id="contact" class="ajax-form" action="https://formspree.io/f/xqpqgqpz" method="POST">
+      <div><label for="name">Name</label><input id="name" name="name" required autocomplete="name"></div>
+      <div><label for="email"><span data-de>Deine E-Mail</span><span data-en>Your email</span></label><input id="email" name="email" type="email" required autocomplete="email"></div>
+      <div><label for="msg"><span data-de>Nachricht</span><span data-en>Message</span></label><textarea id="msg" name="message" required></textarea></div>
+      <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label class="check"><input type="checkbox" required>
+        <span><span data-de>Ich bin einverstanden, dass meine Angaben zur Beantwortung meiner Nachricht verarbeitet werden (siehe <a href="datenschutz.html">Datenschutz</a>).</span><span data-en>I agree that my details are processed to answer my message (see <a href="datenschutz.html">privacy policy</a>).</span></span></label>
+      <div><button class="btn btn-sun" type="submit"><span data-de>Nachricht senden</span><span data-en>Send message</span></button></div>
+      <div class="form-status" role="status" data-ok-de="Danke! Deine Nachricht ist angekommen." data-ok-en="Thanks! Your message has been sent."></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> <span class="bronze-text">Tenkan</span> · Berlin</span>
+    <span><a class="ig-link" href="https://www.instagram.com/tenkanmusic" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ig-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>Instagram</a> · <a href="impressum.html" rel="nofollow">Impressum</a> · <a href="datenschutz.html"><span data-de>Datenschutz</span><span data-en>Privacy</span></a></span>
+  </div>
+</footer>
+
+<script>
+// ---- Songs ----
+const ARTIST = '7JMD8sj6MqssBZjgOqS4qf';
+const SONGS = [
+  ['never-leave-me-alone','Never leave me alone','06KrHyrojocgHecydqrmc4',''],
+  ['hear-the-sound','Hear the Sound','0Jj8hPxGzwqCHLssZBVzot',''],
+  ['space-circus','Space Circus','0QhhXWe65jPEICXxURNuHb',''],
+  ['the-past-and-the-future','The Past and The Future','3OkQ2WFacqcqmwoD8ptsfv',''],
+  ['sunstorm','Sunstorm','4z6AMPo32O9nDaFPstBFaU','feat. Burnout'],
+  ['spaceman','Spaceman','15zAJcNthxfMMBCqhvjwZb',''],
+  ['machine','Machine','5qMaHW6lGEpQa3bb9yiEm6','feat. Burnout'],
+  ['alone-in-the-dark','Alone in the Dark','2gC1KgxvJ6pQqooE9QvNQW','Radio Edit'],
+];
+const player = document.getElementById('player');
+function embed(kind, id, h) {
+  player.innerHTML = `<iframe src="https://open.spotify.com/embed/${kind}/${id}?theme=0" height="${h}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify"></iframe>`;
+}
+// ---- Cover-Faecher: vorne gross, nach hinten kleiner und auseinander ----
+const stage = document.getElementById('fan-stage'), fanEl = document.getElementById('fan');
+let front = 0;
+const cards = SONGS.map(([file, title], i) => {
+  const b = document.createElement('button');
+  b.className = 'fan-card'; b.type = 'button';
+  b.innerHTML = `<img src="covers/${file}.jpg" alt="Cover: ${title}">`;
+  b.onclick = () => { if (i === front) play(); else { front = i; layout(); } };
+  stage.appendChild(b); return b;
+});
+function layout() {
+  const cs = getComputedStyle(fanEl), n = SONGS.length;
+  const gap = parseFloat(cs.getPropertyValue('--gap')), depth = parseFloat(cs.getPropertyValue('--depth')), rise = parseFloat(cs.getPropertyValue('--rise'));
+  cards.forEach((c, i) => {
+    let d = (i - front + n) % n; if (d > n / 2) d -= n;   // Abstand zum vorderen Cover, links (-) oder rechts (+)
+    const k = Math.abs(d), side = Math.sign(d);
+    const x = side * (gap * 1.35 * k + gap * 0.3 * k * k);       // nach hinten immer weiter auseinander
+    const z = -depth * k, y = -rise * k * k * 0.6;
+    const rot = -side * Math.min(28, 10 + k * 5);
+    c.style.transform = `translate3d(${x}px, ${y}px, ${z}px) rotateY(${rot}deg)`;
+    c.style.zIndex = 100 - k; c.style.opacity = k > 3 ? 0 : 1 - k * 0.12; c.style.pointerEvents = k > 3 ? 'none' : '';
+    c.style.filter = `brightness(${1 - k * 0.13})`;
+    c.classList.toggle('front', k === 0); c.tabIndex = k === 0 ? 0 : -1;
+  });
+  const [, title, , extra] = SONGS[front];
+  document.getElementById('fan-title').textContent = title;
+  document.getElementById('fan-sub').innerHTML = extra || '<i class="bronze-text" style="font-style:normal">Tenkan</i>';
+}
+function play() { embed('track', SONGS[front][2], 152); player.scrollIntoView({behavior: 'smooth', block: 'nearest'}); }
+const step = s => { front = (front + s + SONGS.length) % SONGS.length; layout(); };
+document.getElementById('fan-prev').onclick = () => step(-1);
+document.getElementById('fan-next').onclick = () => step(1);
+document.getElementById('fan-play').onclick = play;
+fanEl.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') step(-1); if (e.key === 'ArrowRight') step(1); });
+let tx = null;
+fanEl.addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive: true});
+fanEl.addEventListener('touchend', e => { if (tx === null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1); tx = null; });
+addEventListener('resize', layout);
+layout();
+document.getElementById('load-artist').onclick = () => embed('artist', ARTIST, 452);
+
+// ---- Sprache ----
+const html = document.documentElement, langBtn = document.getElementById('lang');
+function setLang(l) { html.lang = l; langBtn.textContent = l === 'de' ? 'EN' : 'DE'; try { localStorage.setItem('lang', l); } catch (e) {} }
+let start = 'de';
+try { start = localStorage.getItem('lang') || (navigator.language.startsWith('de') ? 'de' : 'en'); } catch (e) {}
+setLang(start);
+langBtn.onclick = () => setLang(html.lang === 'de' ? 'en' : 'de');
+
+// ---- Fan-Wand: freigegebene Beitraege hier eintragen ----
+// Beispiel: { name: 'Anna', text: 'The Storm laeuft bei mir in Dauerschleife!' },
+const FANWALL = [
+];
+const wall = document.getElementById('wall');
+FANWALL.forEach(({name, text}) => {
+  const d = document.createElement('div'); d.className = 'note';
+  const p = document.createElement('p'); p.textContent = text;
+  const b = document.createElement('b'); b.textContent = '– ' + name;
+  d.append(p, b); wall.appendChild(d);
+});
+if (FANWALL.length) document.getElementById('wall-empty').remove(); else wall.remove();
+
+// ---- Formulare (Kontakt + Fan-Wand) ueber Formspree ----
+document.querySelectorAll('.ajax-form').forEach(form => {
+  const status = form.querySelector('.form-status');
+  form.addEventListener('submit', async ev => {
+    ev.preventDefault();
+    const de = html.lang === 'de';
+    status.style.color = 'var(--muted)'; status.textContent = de ? 'Wird gesendet …' : 'Sending …';
+    try {
+      const r = await fetch(form.action, {method: 'POST', body: new FormData(form), headers: {Accept: 'application/json'}});
+      if (!r.ok) throw new Error(r.status);
+      form.reset(); status.style.color = 'var(--cyan)';
+      status.textContent = de ? status.dataset.okDe : status.dataset.okEn;
+    } catch (e) {
+      status.style.color = 'var(--ember)';
+      status.textContent = de ? 'Das hat leider nicht geklappt. Bitte versuch es später noch einmal.' : 'Sorry, that did not work. Please try again later.';
+    }
+  });
+});
+
+// ---- Pre-Save (Platzhalter) ----
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// ---- Sternenhimmel ----
+const cv = document.getElementById('stars'), cx = cv.getContext('2d');
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let stars = [], band = null;
+function gauss() { return (Math.random() + Math.random() + Math.random() + Math.random() - 2) / 2; }
+function milkyWay(w, h) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  const g = c.getContext('2d');
+  // Band schraeg von links unten nach rechts oben
+  const x0 = -w * .1, y0 = h * 1.05, x1 = w * 1.1, y1 = -h * .1;
+  const len = Math.hypot(x1 - x0, y1 - y0), ux = (x1 - x0) / len, uy = (y1 - y0) / len, nx = -uy, ny = ux;
+  const width = Math.max(w, h) * .32;
+  g.globalCompositeOperation = 'lighter';
+  const tones = ['120,110,200', '80,120,210', '170,120,200', '255,160,110', '90,170,220'];
+  for (let i = 0; i < 110; i++) {         // weiche Nebelwolken
+    const d = Math.random() * len, o = gauss() * width * .6;
+    const x = x0 + ux * d + nx * o, y = y0 + uy * d + ny * o, r = width * (.35 + Math.random() * .7);
+    const gr = g.createRadialGradient(x, y, 0, x, y, r);
+    gr.addColorStop(0, `rgba(${tones[i % tones.length]},.12)`); gr.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = gr; g.fillRect(x - r, y - r, 2 * r, 2 * r);
+  }
+  const n = Math.round(w * h / 280);       // dichter Sternenstaub
+  for (let i = 0; i < n; i++) {
+    const d = Math.random() * len, o = gauss() * width;
+    const x = x0 + ux * d + nx * o, y = y0 + uy * d + ny * o;
+    g.fillStyle = `rgba(255,255,255,${Math.min(1, (.18 + Math.random() * .54) * (1 - Math.min(1, Math.abs(o) / width) * .5))})`;
+    g.fillRect(x, y, Math.random() < .9 ? 1 : 1.6, Math.random() < .9 ? 1 : 1.6);
+  }
+  g.globalCompositeOperation = 'source-over';   // dunkle Staubbahn in der Mitte
+  for (let i = 0; i < 40; i++) {
+    const d = Math.random() * len, o = gauss() * width * .15;
+    const x = x0 + ux * d + nx * o, y = y0 + uy * d + ny * o, r = width * (.15 + Math.random() * .25);
+    const gr = g.createRadialGradient(x, y, 0, x, y, r);
+    gr.addColorStop(0, 'rgba(5,6,13,.22)'); gr.addColorStop(1, 'rgba(5,6,13,0)');
+    g.fillStyle = gr; g.fillRect(x - r, y - r, 2 * r, 2 * r);
+  }
+  return c;
+}
+function resize() {
+  cv.width = innerWidth; cv.height = innerHeight;
+  band = milkyWay(cv.width, cv.height);
+  stars = Array.from({length: Math.round(innerWidth * innerHeight / 5000)}, () => ({
+    x: Math.random() * cv.width, y: Math.random() * cv.height, r: Math.random() * 1.3 + .2,
+    p: Math.random() * 6.28, s: Math.random() * .8 + .2, c: Math.random() < .1 ? '255,190,140' : (Math.random() < .1 ? '150,230,255' : '255,255,255')
+  }));
+  draw(0);
+}
+function draw(t) {
+  cx.clearRect(0, 0, cv.width, cv.height);
+  if (band) cx.drawImage(band, 0, 0);
+  for (const s of stars) {
+    const a = .35 + .65 * (still ? .7 : (Math.sin(t / 1000 * s.s + s.p) + 1) / 2);
+    cx.fillStyle = `rgba(${s.c},${a})`; cx.beginPath(); cx.arc(s.x, s.y, s.r, 0, 6.28); cx.fill();
+  }
+}
+let last = 0;
+function loop(t) { if (t - last > 66) { draw(t); last = t; } requestAnimationFrame(loop); } // ~15 Bilder/s spart Strom
+addEventListener('resize', resize); resize();
+if (!still) requestAnimationFrame(loop);
+</script>
+</body>
+</html>
